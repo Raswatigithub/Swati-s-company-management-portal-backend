@@ -21,7 +21,7 @@ services:
       - key: COOKIE_SAME_SITE
         value: none
 
-  - type: web
+  - type: static
     name: swatis-company-portal
     env: static
     rootDir: client
