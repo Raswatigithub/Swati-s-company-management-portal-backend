@@ -1,0 +1,27 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Create .env file from Secret
+        run: |
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
+          
+      - name: Build
+        run: npm run build
+      
+      # Now, deploy the 'build' folder to your hosting provider (e.g., Netlify, Vercel, or GitHub Pages)
